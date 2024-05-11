@@ -16,7 +16,7 @@ module "catalogue" {
  priority = var.priority
  app_listener_arn = data.aws_ssm_parameter.app-lb-listener_arn.value
  port = "8080"
- app_version = var.appversion
+ app_version = var.app_version
 }
 
 

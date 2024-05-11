@@ -33,6 +33,6 @@ variable "priority" {
 variable "name" {
   default = "catalogue"
 }
-variable "appversion" {
+variable "app_version" {
   
 }
