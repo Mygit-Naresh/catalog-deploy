@@ -75,6 +75,7 @@ pipeline {
             expression {
                params.application == 'deploy'
             }
+         }
        script {
         sh """
           cd terraform
@@ -115,5 +116,4 @@ pipeline {
         
     }
   }
-}
 }
