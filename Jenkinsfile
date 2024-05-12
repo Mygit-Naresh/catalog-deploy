@@ -11,8 +11,8 @@ pipeline {
 
    parameters {
 //         // booleanParam, choice, file, text, password, run, or string
-        booleanParam(defaultValue: 'true', description: '', name: 'deploy')
-        booleanParam(defaultValue: 'true', description: '', name: 'destroy')
+        booleanParam(defaultValue: '', description: '', name: 'deploy')
+        booleanParam(defaultValue: '', description: '', name: 'destroy')
         string(defaultValue: '', description: 'What is version?', name: "version")
         string(defaultValue: '', description: 'What is environment?', name: "environment")
       //   string(defaultValue: 'Write deploy for app deploy OR write destroy for app destroy', description: 'What is application?', name: "application")
