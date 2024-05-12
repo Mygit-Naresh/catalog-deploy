@@ -71,12 +71,13 @@ pipeline {
    //  }
      stage('terraform apply from tfvars') {
       steps {
+         
+       script {
          when {
             expression {
                params.application == 'deploy'
             }
          }
-       script {
         sh """
           cd terraform
           terraform apply -auto-approve -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" 
@@ -87,12 +88,13 @@ pipeline {
     }
          stage('terraform destroy from tfvars') {
       steps {
+         
+       script {
          when {
             expression {
                params.application == 'destroy'
             }
          }
-       script {
         sh """
           cd terraform
           terraform destroy -auto-approve -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" 
