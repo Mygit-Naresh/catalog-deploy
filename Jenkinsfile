@@ -71,14 +71,14 @@ pipeline {
    //  }
    //  }
      stage('terraform apply from tfvars') {
-      steps {
-            when {
+           when {
             expression {
                params.deploy
             }
          }
-         
-       script {
+      steps {
+       
+         script {
       
         sh """
           cd terraform
@@ -89,12 +89,13 @@ pipeline {
     }
     }
          stage('terraform destroy from tfvars') {
-      steps {
-           when {
+            when {
             expression {
                params.destroy
             }
          }
+      steps {
+           
        script {
        
         sh """
