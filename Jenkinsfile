@@ -14,7 +14,7 @@ pipeline {
 //         booleanParam(defaultValue: true, description: '', name: 'booleanExample')
         string(defaultValue: '', description: 'What is version?', name: "version")
         string(defaultValue: '', description: 'What is environment?', name: "environment")
-        string(defaultValue: 'destroy', description: 'What is destroy?', name: "destroy")
+        string(defaultValue: 'Write deploy for app deploy OR write destroy for app destroy', description: 'What is application?', name: "application")
 //         text(defaultValue: "This is a multiline\n text", description: "Multiline Text", name: "textExample")
 //         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'choiceExample')
 //         password(defaultValue: "Password", description: "Password Parameter", name: "passwordExample")
@@ -71,6 +71,10 @@ pipeline {
    //  }
      stage('terraform apply from tfvars') {
       steps {
+         when {
+            expression {
+               params.application == 'deploy'
+            }
        script {
         sh """
           cd terraform
@@ -84,7 +88,7 @@ pipeline {
       steps {
          when {
             expression {
-               params.destroy == 'destroy'
+               params.application == 'destroy'
             }
          }
        script {
