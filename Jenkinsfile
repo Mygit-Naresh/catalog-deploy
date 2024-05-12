@@ -14,6 +14,7 @@ pipeline {
 //         booleanParam(defaultValue: true, description: '', name: 'booleanExample')
         string(defaultValue: '', description: 'What is version?', name: "version")
         string(defaultValue: '', description: 'What is environment?', name: "environment")
+        string(defaultValue: 'destroy', description: 'What is destroy?', name: "destroy")
 //         text(defaultValue: "This is a multiline\n text", description: "Multiline Text", name: "textExample")
 //         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'choiceExample')
 //         password(defaultValue: "Password", description: "Password Parameter", name: "passwordExample")
@@ -56,6 +57,7 @@ pipeline {
 
     }
     }
+    
    // stage('terraform plan from tfvars') {
    //    steps {
    //     script {
@@ -73,6 +75,22 @@ pipeline {
         sh """
           cd terraform
           terraform apply -auto-approve -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" 
+          """
+       }
+
+    }
+    }
+         stage('terraform destroy from tfvars') {
+      steps {
+         when {
+            expression {
+               params.destroy == 'destroy'
+            }
+         }
+       script {
+        sh """
+          cd terraform
+          terraform destroy -auto-approve -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" 
           """
        }
 
